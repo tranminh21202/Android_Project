@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_PhieuMuon"
+            android:title="Quản lý Hóa Đơn"
+            android:icon="@drawable/home"
+            />
+        <item
+            android:id="@+id/nav_LoaiCourse"
+            android:title="Quản lý Loại Khóa Học"
+            android:icon="@drawable/catecourse"
+            />
+        <item
+            android:id="@+id/nav_Course"
+            android:title="Quản lý Khóa Học"
+            android:icon="@drawable/course"/>
+        <item
+            android:id="@+id/nav_ThanhVien"
+            android:title="Quản lý Thành Viên"
+            android:icon="@drawable/member"/>
+        <item android:title="Thống Kê">
+            <menu>
+                <item
+                    android:id="@+id/sub_Top"
+                    android:title="Khóa học đăng ký nhiều nhất"
+                    android:icon="@drawable/top"/>
+                <item
+                    android:id="@+id/sub_DoanhThu"
+                    android:title="Doanh Thu"
+                    android:icon="@drawable/money"/>
+            </menu>
+        </item>
+        <item android:title="Người Dùng">
+            <menu>
+                <item
+                    android:id="@+id/sub_AddUser"
+                    android:title="Thêm người dùng"
+                    android:visible="false"
+                    android:icon="@drawable/adduser"/>
+                <item
+                    android:id="@+id/sub_Pass"
+                    android:title="Đổi mật khẩu"
+                    android:icon="@drawable/changepass" />
+                <item
+                    android:id="@+id/sub_Logout"
+                    android:title="Đăng xuất"
+                    android:icon="@drawable/logout"/>
+            </menu>
+        </item>
+    </group>
+</menu>
