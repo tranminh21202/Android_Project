@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/background_thanhvien_item">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="8"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_loaicourse_item">
+        <ImageView
+            android:id="@+id/img"
+            android:layout_weight="2"
+            android:src="@drawable/topitem"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/tvCourse"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:text="MaLoaiCourse"
+            android:gravity="center"
+            android:textAlignment="textStart"
+            android:textColor="#E87D10"
+            android:layout_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            tools:ignore="RtlCompat" />
+        <TextView
+            android:id="@+id/tvSL"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="#E87D10"
+            android:text="SL"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="60dp"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

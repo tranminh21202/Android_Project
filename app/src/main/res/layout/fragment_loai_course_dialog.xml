@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#EAD1AB">
+    android:background="#ECC996">
     <EditText
-        android:id="@+id/edMaTV"
+        android:id="@+id/edMaLoaiCourse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Mã thành viên"
+        android:hint="Mã khóa học"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
@@ -21,23 +21,10 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edTenTV"
+            android:id="@+id/edTenLoaiCourse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tên thành viên"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edNamSinh"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Năm sinh"/>
+            android:hint="Tên khóa học"/>
     </com.google.android.material.textfield.TextInputLayout>
     
     <LinearLayout
@@ -46,7 +33,7 @@
         android:orientation="horizontal"
         android:layout_margin="20dp">
         <Button
-            android:id="@+id/btnSaveTV"
+            android:id="@+id/btnSaveLoaiCourse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Lưu"
@@ -54,7 +41,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_weight="1"/>
         <Button
-            android:id="@+id/btnCancelTV"
+            android:id="@+id/btnCancelLoaiCourse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hủy"

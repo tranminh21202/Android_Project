@@ -19,7 +19,9 @@ import android.widget.TextView;
 import com.example.coursemanagerprj.dao.DemoDB;
 import com.example.coursemanagerprj.fragment.ChangePasswordFragment;
 import com.example.coursemanagerprj.fragment.CourseFragment;
+import com.example.coursemanagerprj.fragment.LoaiCourseFragment;
 import com.example.coursemanagerprj.fragment.ThanhVienFragment;
+import com.example.coursemanagerprj.fragment.TopFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_LoaiCourse:
                         setTitle("Quản lý Loại Khóa Học");
+                        LoaiCourseFragment loaiCourseFragment=new LoaiCourseFragment();
+                        manager.beginTransaction().replace(R.id.content_frame,loaiCourseFragment).commit();
                         break;
                     case R.id.nav_Course:
                         setTitle("Quản lý Khóa Học");
@@ -63,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.sub_Top:
                         setTitle("Khóa học đăng ký nhiều nhất");
+                        TopFragment topFragment=new TopFragment();
+                        manager.beginTransaction().replace(R.id.content_frame,topFragment).commit();
                         break;
                     case R.id.sub_DoanhThu:
                         setTitle("Doanh Thu");
