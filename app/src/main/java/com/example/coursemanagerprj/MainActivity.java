@@ -17,11 +17,15 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.coursemanagerprj.dao.DemoDB;
+import com.example.coursemanagerprj.dao.QuanLyDAO;
 import com.example.coursemanagerprj.fragment.ChangePasswordFragment;
 import com.example.coursemanagerprj.fragment.CourseFragment;
+import com.example.coursemanagerprj.fragment.DoanhThuFragment;
 import com.example.coursemanagerprj.fragment.LoaiCourseFragment;
+import com.example.coursemanagerprj.fragment.PhieuMuonFragment;
 import com.example.coursemanagerprj.fragment.ThanhVienFragment;
 import com.example.coursemanagerprj.fragment.TopFragment;
+import com.example.coursemanagerprj.model.QuanLy;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,18 +34,26 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     View headerView;
     TextView txtUser;
+    QuanLyDAO quanLyDAO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        FragmentManager manager=getSupportFragmentManager();
+        PhieuMuonFragment phieuMuonFragment = new PhieuMuonFragment();
+        manager.beginTransaction().replace(R.id.content_frame,phieuMuonFragment).commit();
         navigationView.bringToFront();
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.nav_drawer_open,R.string.nav_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         Intent i = getIntent();
-        txtUser.setText("Welcome !");
+        String user = i.getStringExtra("user");
+        quanLyDAO = new QuanLyDAO(this);
+        QuanLy quanLy = quanLyDAO.getID(user);
+        String username = quanLy.getHoTen();
+        txtUser.setText("Welcome " + username +"!");
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -49,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.nav_PhieuMuon:
                         setTitle("Quản lý Hóa Đơn");
+                        PhieuMuonFragment phieuMuonFragment = new PhieuMuonFragment();
+                        manager.beginTransaction().replace(R.id.content_frame,phieuMuonFragment).commit();
                         break;
                     case R.id.nav_LoaiCourse:
                         setTitle("Quản lý Loại Khóa Học");
@@ -72,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.sub_DoanhThu:
                         setTitle("Doanh Thu");
+                        DoanhThuFragment doanhThuFragment = new DoanhThuFragment();
+                        manager.beginTransaction().replace(R.id.content_frame,doanhThuFragment).commit();
                         break;
                     case R.id.sub_AddUser:
                         setTitle("Thêm người dùng");

@@ -19,7 +19,7 @@ import java.util.List;
 public class PhieuMuonDAO {
     private SQLiteDatabase db;
     private Context context;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
     public PhieuMuonDAO(Context context) {
         this.context = context;
