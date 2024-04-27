@@ -64,4 +64,20 @@ public class ThanhVienDAO {
         return list.get(0);
     }
 
+    @SuppressLint("Range")
+    public List<ThanhVien> searchThanhVien(String key){
+        List<ThanhVien> list = new ArrayList<>();
+        String whereClause = "hoTen like ?";
+        String[] whereArgs = {"%"+key+"%"};
+        Cursor c = db.query("ThanhVien",null,whereClause,whereArgs,null,null,null);
+        while (c!=null && c.moveToNext()){
+            ThanhVien obj = new ThanhVien();
+            obj.setMaTV(Integer.parseInt(c.getString(c.getColumnIndex("maTV"))));
+            obj.setHoTen(c.getString(c.getColumnIndex("hoTen")));
+            obj.setNamSinh(c.getString(c.getColumnIndex("namSinh")));
+            list.add(obj);
+        }
+        return list;
+    }
+
 }

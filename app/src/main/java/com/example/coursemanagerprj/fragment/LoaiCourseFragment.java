@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +38,7 @@ public class LoaiCourseFragment extends Fragment {
     Dialog dialog;
     EditText edMaLoaiCourse,edTenLoaiCourse;
     Button btnSaveLoaiCourse,btnCancelLoaiCourse;
+    SearchView searchView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,6 +46,7 @@ public class LoaiCourseFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_loai_course, container, false);
         listView=v.findViewById(R.id.lvLoaiCourse);
         fab=v.findViewById(R.id.fabLoaiCourse);
+        searchView=v.findViewById(R.id.searchLoaiCourse);
         dao=new LoaiCourseDAO(getActivity());
         updateLV();
         fab.setOnClickListener(new View.OnClickListener() {
@@ -60,11 +63,29 @@ public class LoaiCourseFragment extends Fragment {
                 return false;
             }
         });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                autoupdateLV(newText);
+                return true;
+            }
+        });
         return v;
     }
 
     void updateLV(){
         list=(ArrayList<LoaiCourse>) dao.getAll();
+        adapter=new LoaiCourseAdapter(getActivity(),this,list);
+        listView.setAdapter(adapter);
+    }
+
+    void autoupdateLV(String s){
+        list=(ArrayList<LoaiCourse>) dao.searchLoaiCourse(s);
         adapter=new LoaiCourseAdapter(getActivity(),this,list);
         listView.setAdapter(adapter);
     }

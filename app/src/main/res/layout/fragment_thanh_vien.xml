@@ -5,12 +5,23 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchTV"
+        app:queryHint="Search TV"
+        app:iconifiedByDefault="false"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/background_searchview"
+        android:backgroundTint="#E8CAC8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <ListView
         android:id="@+id/lvThanhVien"
         android:dividerHeight="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="55dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

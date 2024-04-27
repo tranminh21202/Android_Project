@@ -117,4 +117,28 @@ public class PhieuMuonDAO {
         return list.get(0);
     }
 
+    @SuppressLint("Range")
+    public List<PhieuMuon> searchPhieuMuon(String key){
+        List<PhieuMuon> list = new ArrayList<>();
+        String whereClause = "maQL like ?";
+        String[] whereArgs = {"%"+key+"%"};
+        Cursor c = db.query("PhieuMuon",null,whereClause,whereArgs,null,null,null);
+        while (c!=null && c.moveToNext()){
+            PhieuMuon obj = new PhieuMuon();
+            obj.setMaPM(Integer.parseInt(c.getString(c.getColumnIndex("maPM"))));
+            obj.setMaQL(c.getString(c.getColumnIndex("maQL")));
+            obj.setMaTV(Integer.parseInt(c.getString(c.getColumnIndex("maTV"))));
+            obj.setMaCourse(Integer.parseInt(c.getString(c.getColumnIndex("maCourse"))));
+            obj.setTienThue(Integer.parseInt(c.getString(c.getColumnIndex("tienThue"))));
+            try{
+                obj.setNgay(simpleDateFormat.parse(c.getString(c.getColumnIndex("ngay"))));
+            } catch (ParseException e){
+                e.printStackTrace();
+            }
+            obj.setTraCourse(Integer.parseInt(c.getString(c.getColumnIndex("traCourse"))));
+            list.add(obj);
+        }
+        return list;
+    }
+
 }

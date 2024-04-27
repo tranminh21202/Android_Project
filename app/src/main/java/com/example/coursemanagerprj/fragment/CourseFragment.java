@@ -1,11 +1,13 @@
 package com.example.coursemanagerprj.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -48,7 +50,9 @@ public class CourseFragment extends Fragment {
     LoaiCourseDAO loaiCourseDAO;
     LoaiCourse loaiCourse;
     int maLoaiCourse, position;
+    SearchView searchView;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,6 +62,7 @@ public class CourseFragment extends Fragment {
         courseDAO=new CourseDAO(getActivity());
         updateCourse();
         fab=v.findViewById(R.id.fab);
+        searchView=v.findViewById(R.id.searchCourse);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,11 +77,29 @@ public class CourseFragment extends Fragment {
                 return false;
             }
         });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                autoupdateCourse(newText);
+                return true;
+            }
+        });
         return v;
     }
 
     void updateCourse(){
         list=(List<Course>) courseDAO.getAll();
+        adapter=new CourseAdapter(getActivity(),this,list);
+        lvCourse.setAdapter(adapter);
+    }
+
+    void autoupdateCourse(String s){
+        list=(List<Course>) courseDAO.searchCourse(s);
         adapter=new CourseAdapter(getActivity(),this,list);
         lvCourse.setAdapter(adapter);
     }

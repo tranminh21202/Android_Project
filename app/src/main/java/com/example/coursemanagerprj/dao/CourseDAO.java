@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.coursemanagerprj.database.DbHelper;
 import com.example.coursemanagerprj.model.Course;
+import com.example.coursemanagerprj.model.LoaiCourse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +65,23 @@ public class CourseDAO {
         String sql = "SELECT * FROM Course WHERE maCourse=?";
         List<Course> list = getData(sql,id);
         return list.get(0);
+    }
+
+    @SuppressLint("Range")
+    public List<Course> searchCourse(String key){
+        List<Course> list = new ArrayList<>();
+        String whereClause = "tenCourse like ?";
+        String[] whereArgs = {"%"+key+"%"};
+        Cursor c = db.query("Course",null,whereClause,whereArgs,null,null,null);
+        while (c!=null && c.moveToNext()){
+            Course obj = new Course();
+            obj.setMaCourse(Integer.parseInt(c.getString(c.getColumnIndex("maCourse"))));
+            obj.setTenCourse(c.getString(c.getColumnIndex("tenCourse")));
+            obj.setGiaThue(Integer.parseInt(c.getString(c.getColumnIndex("giaThue"))));
+            obj.setMaLoai(Integer.parseInt(c.getString(c.getColumnIndex("maLoai"))));
+            list.add(obj);
+        }
+        return list;
     }
 
 }

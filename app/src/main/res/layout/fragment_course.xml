@@ -4,11 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchCourse"
+        app:queryHint="Search Course"
+        app:iconifiedByDefault="false"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/background_searchview"
+        android:backgroundTint="#E8CAC8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <ListView
         android:id="@+id/lvCourse"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="55dp"
         android:dividerHeight="15dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

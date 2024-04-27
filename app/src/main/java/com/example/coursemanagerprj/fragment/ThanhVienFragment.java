@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +27,7 @@ import com.example.coursemanagerprj.model.ThanhVien;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ThanhVienFragment extends Fragment {
     ListView listView;
@@ -37,6 +39,7 @@ public class ThanhVienFragment extends Fragment {
     Dialog dialog;
     EditText edMaTV,edTenTV,edNamSinh;
     Button btnSaveTV,btnCancelTV;
+    SearchView searchView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,6 +47,7 @@ public class ThanhVienFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_thanh_vien, container, false);
         listView=v.findViewById(R.id.lvThanhVien);
         fab=v.findViewById(R.id.fab);
+        searchView=v.findViewById(R.id.searchTV);
         dao=new ThanhVienDAO(getActivity());
         updateLV();
         fab.setOnClickListener(new View.OnClickListener() {
@@ -60,11 +64,29 @@ public class ThanhVienFragment extends Fragment {
                 return false;
             }
         });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                autoupdateLV(newText);
+                return true;
+            }
+        });
         return v;
     }
 
     void updateLV(){
         list=(ArrayList<ThanhVien>) dao.getAll();
+        adapter=new ThanhVienAdapter(getActivity(),this,list);
+        listView.setAdapter(adapter);
+    }
+
+    void autoupdateLV(String s){
+        list=(ArrayList<ThanhVien>) dao.searchThanhVien(s);
         adapter=new ThanhVienAdapter(getActivity(),this,list);
         listView.setAdapter(adapter);
     }
@@ -151,4 +173,5 @@ public class ThanhVienFragment extends Fragment {
         }
         return check;
     }
+
 }

@@ -1,11 +1,13 @@
 package com.example.coursemanagerprj.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -62,14 +64,18 @@ public class PhieuMuonFragment extends Fragment {
     int maCourse, tienThue;
     int positionTV, positionCourse;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+    SearchView searchView;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_phieu_muon, container, false);
         lvPhieuMuon=v.findViewById(R.id.lvPhieuMuon);
         fab=v.findViewById(R.id.fabPM);
+        searchView=v.findViewById(R.id.searchPM);
         dao = new PhieuMuonDAO(getActivity());
+        updatePM();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,12 +90,29 @@ public class PhieuMuonFragment extends Fragment {
                 return false;
             }
         });
-        updatePM();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                autoupdatePM(newText);
+                return true;
+            }
+        });
         return v;
     }
 
     void updatePM(){
         list=(ArrayList<PhieuMuon>) dao.getAll();
+        adapter=new PhieuMuonAdapter(getActivity(),this,list);
+        lvPhieuMuon.setAdapter(adapter);
+    }
+
+    void autoupdatePM(String s){
+        list=(ArrayList<PhieuMuon>) dao.searchPhieuMuon(s);
         adapter=new PhieuMuonAdapter(getActivity(),this,list);
         lvPhieuMuon.setAdapter(adapter);
     }

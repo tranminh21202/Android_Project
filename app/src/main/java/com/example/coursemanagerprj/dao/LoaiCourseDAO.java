@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.coursemanagerprj.database.DbHelper;
 import com.example.coursemanagerprj.model.LoaiCourse;
+import com.example.coursemanagerprj.model.ThanhVien;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,21 @@ public class LoaiCourseDAO {
         String sql = "SELECT * FROM LoaiCourse WHERE maLoai=?";
         List<LoaiCourse> list = getData(sql,id);
         return list.get(0);
+    }
+
+    @SuppressLint("Range")
+    public List<LoaiCourse> searchLoaiCourse(String key){
+        List<LoaiCourse> list = new ArrayList<>();
+        String whereClause = "tenLoai like ?";
+        String[] whereArgs = {"%"+key+"%"};
+        Cursor c = db.query("LoaiCourse",null,whereClause,whereArgs,null,null,null);
+        while (c!=null && c.moveToNext()){
+            LoaiCourse obj = new LoaiCourse();
+            obj.setMaLoai(Integer.parseInt(c.getString(c.getColumnIndex("maLoai"))));
+            obj.setTenLoai(c.getString(c.getColumnIndex("tenLoai")));
+            list.add(obj);
+        }
+        return list;
     }
 
 }

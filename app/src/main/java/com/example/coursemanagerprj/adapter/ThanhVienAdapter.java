@@ -35,6 +35,10 @@ public class ThanhVienAdapter extends ArrayAdapter<ThanhVien> {
         this.list=list;
     }
 
+    public void setList(ArrayList<ThanhVien> list) {
+        this.list = list;
+    }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
